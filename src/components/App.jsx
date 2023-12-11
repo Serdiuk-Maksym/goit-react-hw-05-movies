@@ -7,7 +7,7 @@ import Cast from './Cast/Cast';
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route exact path="/" element={<HomePage />} />
       <Route path="/movies" element={<MoviesPage />} />
       <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
       <Route path="/movies/:movieId/cast" element={<Cast />} />

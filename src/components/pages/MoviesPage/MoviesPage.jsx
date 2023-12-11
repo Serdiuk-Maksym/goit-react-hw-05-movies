@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from 'components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -46,13 +47,20 @@ const MoviesPage = () => {
           onKeyDown={handleKeyPress}
         />
         <label for="searchInput">Search Movie</label>
-        <button onClick={handleSearch}>Search</button>
+        <button className="btn btn-primary" onClick={handleSearch}>
+          Search
+        </button>
         <ul className="list-group">
           {searchResults.map(
             (movie, index) =>
               index < 14 && (
                 <li key={movie.id} className="list-group-item">
-                  {movie.title}
+                  <Link
+                    to={`/movies/${movie.id}`}
+                    className="list-group-item-action"
+                  >
+                    {movie.title}
+                  </Link>
                 </li>
               )
           )}

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from 'components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
@@ -53,8 +51,8 @@ const MovieDetailsPage = () => {
       </div>
       <div>
         <h3>Additional information</h3>
-        <Link to={Cast}>Cast</Link>
-        <Link to={Reviews}>Reviews</Link>
+        <Link to={`cast`}>Cast</Link>
+        <Link to={`reviews`}>Reviews</Link>
       </div>
     </div>
   );

@@ -1,43 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { fetchMovieCast } from 'components/Api/fetchMovieCast';
+import { useParams } from 'react-router-dom';
 
-const Cast = ({ movieId }) => {
-  const [cast, setCast] = useState([]);
+const Cast = () => {
+  const [movieCast, setMovieCast] = useState();
+  const { movieId } = useParams();
 
   useEffect(() => {
-    const fetchCast = async () => {
+    async function getCast() {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=90bd882d2df921dcde8d1dfedfe3f564`
-        );
-        const castData = response.data.cast;
-        setCast(castData);
+        const castData = await fetchMovieCast(movieId);
+        setMovieCast(castData);
       } catch (error) {
-        console.error('Error fetching cast:', error);
+        console.log(error);
       }
-    };
-
-    fetchCast();
+    }
+    getCast();
   }, [movieId]);
+
+  if (!movieCast || movieCast.length === 0) {
+    return <>Sorry, there is no info about film cast</>;
+  }
 
   return (
     <>
       <ul>
-        {cast.map(elem => (
-          <li key={elem.id}>
-            <img
-              src={
-                elem.profile_path
-                  ? 'https://image.tmdb.org/t/p/w400' + elem.profile_path
-                  : 'https://gdr.one/simg'
-              }
-              alt={elem.name}
-            />
-            <h3>{elem?.name}</h3>
-            <p>Character:</p>
-            <p>{elem?.character}</p>
-          </li>
-        ))}
+        {movieCast?.map(elem => {
+          return (
+            <li key={elem.id}>
+              <img
+                src={
+                  elem.profile_path
+                    ? 'https://image.tmdb.org/t/p/w400' + elem.profile_path
+                    : 'https://gdr.one/simg'
+                }
+                alt={elem.name}
+              />
+              <h3>{elem?.name}</h3>
+              <p>Character:</p>
+              <p>{elem?.character}</p>
+            </li>
+          );
+        })}
       </ul>
     </>
   );

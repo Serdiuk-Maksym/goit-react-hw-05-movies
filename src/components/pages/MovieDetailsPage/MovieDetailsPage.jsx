@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from 'components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
-  const { movieId } = useParams(); // Отримання movieId з параметрів шляху
+  const { movieId } = useParams();
 
   useEffect(() => {
     const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
@@ -19,7 +19,6 @@ const MovieDetailsPage = () => {
         return response.json();
       })
       .then(data => {
-        // Отримання інформації про конкретний фільм
         setMovie(data);
       })
       .catch(error => {
@@ -51,8 +50,13 @@ const MovieDetailsPage = () => {
       </div>
       <div>
         <h3>Additional information</h3>
-        <Link to={`cast`}>Cast</Link>
-        <Link to={`reviews`}>Reviews</Link>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link to={`cast`} className="list-group-item-action">
+              Cast
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

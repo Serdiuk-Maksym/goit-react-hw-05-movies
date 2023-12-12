@@ -8,7 +8,7 @@ import Reviews from './Reviews/Reviews';
 export const App = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/movies" element={<MoviesPage />} />
       <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
         <Route path="cast" element={<Cast />} />

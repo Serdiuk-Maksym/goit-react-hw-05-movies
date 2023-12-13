@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from 'components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MoviesPage = () => {
@@ -35,7 +34,6 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <Header />
       <div className="form-floating mb-3">
         <input
           type="text"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieCast } from 'components/Api/fetchMovieCast';
+import { fetchMovieCast } from 'Api/fetchMovieCast';
 import { useParams } from 'react-router-dom';
 
 const Cast = () => {

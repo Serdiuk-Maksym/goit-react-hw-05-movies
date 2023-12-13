@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Header from 'components/Header/Header';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
@@ -26,6 +26,11 @@ const MovieDetailsPage = () => {
       });
   }, [movieId]);
 
+  let goBackLink = '';
+  if (location.state && location.state.from) {
+    goBackLink = location.state.from;
+  }
+
   if (!movie) {
     return (
       <div className="spinner-grow text-primary" role="status">
@@ -36,7 +41,8 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <Header />
+      <Link to={goBackLink}>Go Back</Link>
+      <Outlet />
       <div>
         <img
           alt={movie.poster_path}
@@ -54,6 +60,11 @@ const MovieDetailsPage = () => {
           <li className="list-group-item">
             <Link to={`cast`} className="list-group-item-action">
               Cast
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to={`reviews`} className="list-group-item-action">
+              Reviews
             </Link>
           </li>
         </ul>

@@ -36,9 +36,10 @@ const Cast = () => {
                 }
                 alt={elem.name}
               />
-              <h3>{elem?.name}</h3>
-              <p>Character:</p>
-              <p>{elem?.character}</p>
+              <div>
+                <h3>{elem?.name}</h3>
+                <p>Character: {elem?.character}</p>
+              </div>
             </li>
           );
         })}

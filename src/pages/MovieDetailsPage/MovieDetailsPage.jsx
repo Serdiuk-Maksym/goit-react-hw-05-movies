@@ -42,7 +42,6 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <Link to={goBackLink}>Go Back</Link>
-      <Outlet />
       <div>
         <img
           alt={movie.poster_path}
@@ -68,6 +67,7 @@ const MovieDetailsPage = () => {
             </Link>
           </li>
         </ul>
+        <Outlet />
       </div>
     </div>
   );

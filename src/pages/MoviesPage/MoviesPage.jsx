@@ -8,10 +8,16 @@ const MoviesPage = () => {
 
   const handleSearch = async () => {
     const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
-    const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}`;
+    const apiUrl = `https://api.themoviedb.org/3/search/movie`;
+
+    const params = new URLSearchParams();
+    params.append('api_key', apiKey);
+    params.append('query', searchTerm);
+
+    const urlWithParams = `${apiUrl}?${params.toString()}`;
 
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(urlWithParams);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -44,7 +50,7 @@ const MoviesPage = () => {
           onChange={handleChange}
           onKeyDown={handleKeyPress}
         />
-        <label for="searchInput">Search Movie</label>
+        <label htmlFor="searchInput">Search Movie</label>
         <button className="btn btn-primary" onClick={handleSearch}>
           Search
         </button>

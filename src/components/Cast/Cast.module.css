@@ -1,29 +1,27 @@
-/* Стилі для списку ul */
-ul {
-  list-style-type: none; /* Відключає маркери списку */
-  padding: 0; /* Відступи внутрішніх полів у списку */
+.CastList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* Стилі для елементів списку li */
-li {
-  display: flex; /* Встановлюємо елементи в ряд */
-  align-items: center; /* Вирівнюємо елементи по вертикалі */
-  margin-bottom: 20px; /* Відступи між елементами списку */
+.CastItem {
+  list-style-type: none;
+  width: 180px;
+  height: 400px;
+  border: 1px solid #3f51b5;
 }
 
-/* Стилі для зображення */
-li img {
-  width: 150px; /* Задаємо ширину зображення актора */
-  height: auto; /* Автоматична висота для зображення */
-  margin-right: 15px; /* Відступ праворуч від зображення */
+.CastProfile {
+  width: 100%;
+  height: auto;
 }
 
-/* Стилі для заголовка h3 */
-li h3 {
-  margin: 0; /* Відступи між заголовком та іншими елементами */
+.Actor {
+  color: #3f51b5;
+  text-align: center;
 }
 
-/* Стилі для параграфів p */
-li p {
-  margin: 5px 0; /* Відступи для параграфів */
+.Character {
+  text-align: center;
+  font-size: small;
 }

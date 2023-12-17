@@ -6,6 +6,8 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
+  const backLinkRef =
+    location?.state?.from?.state?.from || location?.state?.from || '/';
 
   useEffect(() => {
     const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
@@ -26,11 +28,6 @@ const MovieDetailsPage = () => {
       });
   }, [movieId]);
 
-  let goBackLink = '';
-  if (location.state && location.state.from) {
-    goBackLink = location.state.from;
-  }
-
   if (!movie) {
     return (
       <div className="spinner-grow text-primary" role="status">
@@ -41,7 +38,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <Link to={goBackLink}>Go Back</Link>
+      <Link to={backLinkRef}>Go Back</Link>
       <div>
         <img
           alt={movie.poster_path}

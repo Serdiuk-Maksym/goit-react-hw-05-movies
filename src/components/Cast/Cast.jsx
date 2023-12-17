@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchMovieCast } from 'Api/fetchMovieCast';
 import { useParams } from 'react-router-dom';
+import styles from './Cast.module.css';
 
 const Cast = () => {
   const [movieCast, setMovieCast] = useState();
@@ -24,10 +25,10 @@ const Cast = () => {
 
   return (
     <>
-      <ul>
+      <ul className={styles.CastList}>
         {movieCast?.map(elem => {
           return (
-            <li key={elem.id}>
+            <li key={elem.id} className={styles.CastItem}>
               <img
                 src={
                   elem.profile_path
@@ -35,10 +36,11 @@ const Cast = () => {
                     : 'https://gdr.one/simg'
                 }
                 alt={elem.name}
+                className={styles.CastProfile}
               />
               <div>
-                <h3>{elem?.name}</h3>
-                <p>Character: {elem?.character}</p>
+                <h3 className={styles.Actor}>{elem?.name}</h3>
+                <p className={styles.Character}>Character: {elem?.character}</p>
               </div>
             </li>
           );

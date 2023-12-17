@@ -5,6 +5,7 @@ import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
 import Cast from './components/Cast/Cast';
 import Reviews from './components/Reviews/Reviews';
 import Layout from 'Layout/Layout';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const App = () => {
   return (

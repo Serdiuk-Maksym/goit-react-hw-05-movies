@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieReviews } from 'Api/fetchMovieReviews';
+import { getReviewMovie } from '../../Api/api-services';
 import { useParams } from 'react-router-dom';
 import styles from './Reviews.module.css';
 
@@ -10,8 +10,8 @@ const Reviews = () => {
   useEffect(() => {
     async function getReviews() {
       try {
-        const reviewsData = await fetchMovieReviews(movieId);
-        setMovieReviews(reviewsData);
+        const reviewsData = await getReviewMovie(movieId);
+        setMovieReviews(reviewsData.results);
       } catch (error) {
         console.log(error);
       }

@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchForm from '../../components/SearchForm/SearchForm';
+import MoviesList from '../../components/MovieList/MovieList';
 
 const MoviesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [searchParams, setSearchParams] = useState({ query: '' });
 
   const handleSearch = async () => {
     const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
@@ -12,7 +14,7 @@ const MoviesPage = () => {
 
     const params = new URLSearchParams();
     params.append('api_key', apiKey);
-    params.append('query', searchTerm);
+    params.append('query', searchParams.query);
 
     const urlWithParams = `${apiUrl}?${params.toString()}`;
 
@@ -28,48 +30,34 @@ const MoviesPage = () => {
     }
   };
 
+  useEffect(() => {
+    handleSearch();
+  }, [searchParams]);
+
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
 
+  const handleSubmit = value => {
+    setSearchParams({ query: value });
+    handleSearch();
+  };
+
   const handleKeyPress = event => {
     if (event.key === 'Enter') {
-      handleSearch();
+      handleSubmit(searchTerm);
     }
   };
 
   return (
     <div>
-      <div className="form-floating mb-3">
-        <input
-          type="text"
-          value={searchTerm}
-          className="form-control"
-          id="searchInput"
-          placeholder=""
-          onChange={handleChange}
-          onKeyDown={handleKeyPress}
-        />
-        <label htmlFor="searchInput">Search Movie</label>
-        <button className="btn btn-primary" onClick={handleSearch}>
-          Search
-        </button>
-        <ul className="list-group">
-          {searchResults.map(
-            (movie, index) =>
-              index < 14 && (
-                <li key={movie.id} className="list-group-item">
-                  <Link
-                    to={`/movies/${movie.id}`}
-                    className="list-group-item-action"
-                  >
-                    {movie.title}
-                  </Link>
-                </li>
-              )
-          )}
-        </ul>
-      </div>
+      <SearchForm
+        handleSubmit={handleSubmit}
+        searchTerm={searchTerm}
+        handleChange={handleChange}
+        handleKeyPress={handleKeyPress}
+      />
+      <MoviesList searchResults={searchResults} />
     </div>
   );
 };

@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieCast } from 'Api/fetchMovieCast';
+import { getCastMovie } from '../../Api/api-services';
 import { useParams } from 'react-router-dom';
 import styles from './Cast.module.css';
 
 const Cast = () => {
-  const [movieCast, setMovieCast] = useState();
+  const [movieCast, setMovieCast] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     async function getCast() {
       try {
-        const castData = await fetchMovieCast(movieId);
-        setMovieCast(castData);
+        const castData = await getCastMovie(movieId);
+        setMovieCast(castData.cast);
       } catch (error) {
         console.log(error);
       }
@@ -32,7 +32,7 @@ const Cast = () => {
               <img
                 src={
                   elem.profile_path
-                    ? 'https://image.tmdb.org/t/p/w400' + elem.profile_path
+                    ? `https://image.tmdb.org/t/p/w400${elem.profile_path}`
                     : 'https://gdr.one/simg'
                 }
                 alt={elem.name}

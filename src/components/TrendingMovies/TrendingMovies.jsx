@@ -1,29 +1,25 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getTrendingFilm } from '../../Api/api-services';
 
 const TrendingMovies = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
-    const apiKey = '90bd882d2df921dcde8d1dfedfe3f564';
-    const apiUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
-
-    fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Отримання списку трендових фільмів
-        setTrendingMovies(data.results.slice(0, 15));
-      })
-      .catch(error => {
+    async function fetchTrendingMovies() {
+      try {
+        const trendingData = await getTrendingFilm();
+        setTrendingMovies(trendingData.results.slice(0, 15));
+      } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
-      });
+      }
+    }
+    fetchTrendingMovies();
   }, []);
+
+  if (!trendingMovies || trendingMovies.length === 0) {
+    return <>No trending movies available</>;
+  }
 
   return (
     <div className="list-group">

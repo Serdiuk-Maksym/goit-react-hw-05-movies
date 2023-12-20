@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import getSearchMovie from '../../Api/api-services';
+import { getSearchMovie } from '../../Api/api-services';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MoviesList from '../../components/MovieList/MovieList';
 

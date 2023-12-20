@@ -6,14 +6,12 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 export const getTrendingFilm = async () => {
   const resp = await axios.get(`/trending/movie/day?api_key=${API_KEY}&page=1`);
   const data = resp.data;
-
   return data;
 };
 
 export const getFilmById = async movieId => {
   const resp = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
   const data = resp.data;
-
   return data;
 };
 
@@ -22,7 +20,6 @@ export const getSearchMovie = async searchQuery => {
     `/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${searchQuery}`
   );
   const data = resp.data;
-
   return data;
 };
 

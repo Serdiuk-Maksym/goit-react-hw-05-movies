@@ -1,9 +1,29 @@
-import TrendingMovies from 'components/TrendingMovies/TrendingMovies';
+import { useState, useEffect } from 'react';
+import { getTrendingFilm } from '../../Api/api-services';
+import MoviesList from 'components/MovieList/MovieList';
 
 const HomePage = () => {
+  const [trendingMovies, setTrendingMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchTrendingMovies() {
+      try {
+        const trendingData = await getTrendingFilm();
+        setTrendingMovies(trendingData.results.slice(0, 15));
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    }
+    fetchTrendingMovies();
+  }, []);
+
+  if (!trendingMovies || trendingMovies.length === 0) {
+    return <>No trending movies available</>;
+  }
+
   return (
     <>
-      <TrendingMovies />
+      <MoviesList searchResults={trendingMovies} />
     </>
   );
 };

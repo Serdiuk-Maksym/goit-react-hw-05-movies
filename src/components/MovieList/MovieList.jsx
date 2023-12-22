@@ -6,7 +6,7 @@ const MoviesList = ({ searchResults }) => {
     <ul className="list-group">
       {searchResults.map(
         (movie, index) =>
-          index < 14 && (
+          index < 15 && (
             <li key={movie.id} className="list-group-item">
               <Link
                 to={`/movies/${movie.id}`}

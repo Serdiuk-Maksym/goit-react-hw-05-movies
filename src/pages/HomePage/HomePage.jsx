@@ -23,6 +23,7 @@ const HomePage = () => {
 
   return (
     <>
+      <h2>Trending Movies</h2>
       <MoviesList searchResults={trendingMovies} />
     </>
   );
